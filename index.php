@@ -9,14 +9,21 @@
 <body>
 <section id="list-products">
     <?php
-        include ("classes/room.php");
-        $theRoom = new room("The Room", "EUR 49,-");
-        $theFlat = new room("The Flat", "EUR 149,-");
-        $thePit = new room("The Pit", "EUR 69,-");
+        include("classes/rectangle.php");
+        include("classes/octagon.php");
 
-        echo $theRoom->toHTML();
-        echo $theFlat->toHTML();
-        echo $thePit->toHTML();
+        $array = [
+            new rectangle("The Room", 49, "none", 80, 50),
+            new rectangle("The Flat", 149, "Food jars", 120, 80),
+            new octagon("The Pit", 69, "Hamster training gloves, Hamster punching sack", 20)
+            ];
+
+        foreach ($array as $item){
+            echo($item->toHTML());
+        }
+
+
+
     ?>
 </section>
 <footer id="contact">

@@ -1,46 +1,55 @@
 <?php
-    class room
+/**
+ * Created by PhpStorm.
+ * User: Lenovo
+ * Date: 01.10.2019
+ * Time: 12:37
+ */
+
+abstract class room{
+    protected $name;
+    protected $price;
+    protected $specials;
+
+    /**
+     * room constructor.
+     * @param $name
+     * @param $price
+     * @param $specials
+     */
+    public function __construct($name, $price, $specials)
     {
-        private $name;
-        private $price;
-
-        public function __construct($name, $price)
-        {
-            $this->name = $name;
-            $this->price = $price;
-        }
-
-
-        /**
-         * @return mixed
-         */
-        public function getName()
-        {
-            return $this->name;
-        }
-
-
-        /**
-         * @return mixed
-         */
-        public function getPrice()
-        {
-            return $this->price;
-        }
-
-        public function toString()
-        {
-            return $this->getName()."\n".$this->getPrice();
-        }
-
-        public function toHTML()
-        {
-            $name = $this->getName();
-            $price = $this->getPrice();
-            return <<<ENDE
-            
-        <h1>$name</h1>
-        <p>$price</p>
-ENDE;
-        }
+        $this->name = $name;
+        $this->price = $price;
+        $this->specials = $specials;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSpecials()
+    {
+        return $this->specials;
+    }
+
+    public abstract function toHTML():string;
+    public abstract function getArea():float;
+
+
+}
