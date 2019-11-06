@@ -1,4 +1,7 @@
 <?php
+namespace SooS\megahamster;
+
+
 /**
  * Created by PhpStorm.
  * User: Lenovo
@@ -6,7 +9,8 @@
  * Time: 12:37
  */
 
-abstract class room{
+abstract class room implements \JsonSerializable
+{
     protected $name;
     protected $price;
     protected $specials;
@@ -50,6 +54,6 @@ abstract class room{
 
     public abstract function toHTML():string;
     public abstract function getArea():float;
-
+    public abstract function jsonSerialize();
 
 }

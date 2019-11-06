@@ -1,12 +1,9 @@
 <?php
+namespace SooS\megahamster;
 
-require_once('room.php');
 
-
-    class rectangle extends room
+class rectangle extends room implements \JsonSerializable
     {
-        protected $name;
-        protected $price;
         protected $length;
         protected $width;
 
@@ -36,11 +33,12 @@ require_once('room.php');
 
             return <<<ENDE
         <h1>$name</h1>
-        <p>$price</p>
-        <p>$length</p>
-        <p>$width</p>
-        <p>$area</p>
-        <p>$specials</p>
+        <p>Preis: $price EUR,-</p>
+        <p>Länge: $length cm</p>
+        <p>Breite: $width cm</p>
+        <p>Fläche: $area cm²</p>
+        <p>Extras: $specials</p>
+        <hr>
 ENDE;
         }
 
@@ -57,4 +55,24 @@ ENDE;
         }
 
 
+    /**
+     * Specify data which should be serialized to JSON
+     * @link https://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    public function jsonSerialize():array
+    {
+        $rv = [
+            'name' => $this->name,
+            'price' => $this->price,
+            'length' => $this->length,
+            'width' => $this->width,
+            'area' => $this->getArea(),
+            'specials' => $this->specials
+
+        ];
+        return $rv;
     }
+}
